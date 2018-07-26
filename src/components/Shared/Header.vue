@@ -28,7 +28,7 @@ export default {
         { title: 'Home', icon: '', link: '/' },
         { title: 'About', icon: '', link: '/about' },
         { title: 'Contact', icon: '', link: '/contact' },
-        { title: 'Blog', icon: '', link: '/blog' },
+        { title: 'Blog', icon: '', link: '/posts' },
         { title: 'Press', icon: '', link: '/press' },
         { title: 'Dox\'s', icon: '', link: '/doxs' },
         { title: 'Ghostbins', icon: '', link: '/ghostbins' },

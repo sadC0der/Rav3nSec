@@ -4,6 +4,8 @@
     <Header />
 
     <router-view style="margin-top: 3rem;"></router-view>
+
+    <Footer />
   </v-app>
 </template>
 
