@@ -14,7 +14,9 @@
                   <v-text-field name="title" label="Title" id="title" v-model="title" required></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field name="imageUrl" label="imageUrl" id="imageUrl" v-model="imageUrl" required></v-text-field>
+                  <v-btn raised class="accent" @click="onPickFile">Upload Image</v-btn>
+                  <input type="file" style="display: none;" ref="fileInput" accept="image/*" @change="onFilePicked">
+                  <!-- <v-text-field name="imageUrl" label="imageUrl" id="imageUrl" v-model="imageUrl" required></v-text-field> -->
                 </v-flex>
                 <v-flex xs12>
                   <img :src="imageUrl" style="width: 100%;" alt="">
@@ -40,7 +42,8 @@ export default {
     return {
       title: '',
       imageUrl: '',
-      description: ''
+      description: '',
+      image: null
     }
   },
   computed: {
@@ -53,14 +56,33 @@ export default {
       if (!this.formIsValid) {
         return
       }
+      if (!this.image) {
+        return
+      }
       const postData = {
         title: this.title,
-        imageUrl: this.imageUrl,
+        image: this.image,
         description: this.description,
         date: new Date()
       }
       this.$store.dispatch('createPost', postData)
       this.$router.push('/posts')
+    },
+    onPickFile () {
+      this.$refs.fileInput.click()
+    },
+    onFilePicked (event) {
+      const files = event.target.files
+      let filename = files[0].name
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file!')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
     }
   }
 }

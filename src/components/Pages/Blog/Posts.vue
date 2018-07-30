@@ -1,8 +1,13 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex xs12 sm6>
         <h1 class="secondary--text">Our Blog</h1>
+      </v-flex>
+      <v-flex xs12 sm6 class="text-xs-right" v-if="userIsAuthenticated">
+        <v-btn to="/posts/new" class="accent">Create a Post</v-btn>
+      </v-flex>
+      <v-flex xs12>
         <hr class="secondary mb-2">
       </v-flex>
       <v-flex xs12>
@@ -33,6 +38,9 @@ export default {
   computed: {
     posts () {
       return this.$store.getters.loadedPosts
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
   }
 }

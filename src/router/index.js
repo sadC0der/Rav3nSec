@@ -12,6 +12,7 @@ import Press from '@/components/Pages/Press'
 import Doxs from '@/components/Pages/Doxs'
 import Ghostbins from '@/components/Pages/Ghostbins'
 import Tangdown from '@/components/Pages/Tangdown'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -40,7 +41,8 @@ export default new Router({
     {
       path: '/posts/new',
       name: 'CreatePost',
-      component: CreatePost
+      component: CreatePost,
+      beforeEnter: AuthGuard
     },
     {
       path: '/posts/:id',

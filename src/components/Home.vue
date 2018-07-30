@@ -12,15 +12,36 @@
         <v-container>
           <h2 class="font-weight-light display-1 text-xs-center">Welcome to Rav3nSec™  website! The most advance pedophile hunting group on the internet. #Rav3nSec</h2>
           <v-divider class="mb-4 mt-3"></v-divider>
-          <v-carousel style="cursor: pointer;">
+
+          <v-layout row wrap>
+            <v-flex xs12 text-xs-center>
+              <v-progress-circular indeterminate color="primary" v-if="loading" style="margin: 20rem 0"></v-progress-circular>
+            </v-flex>
+          </v-layout>
+
+          <v-carousel style="cursor: pointer;" v-if="!loading">
             <v-carousel-item v-for="post in posts" :key="post.id" :src="post.imageUrl" @click.native="onLoadPost(post.id)">
               <div class="post-preview">
                 <div class="title">{{ post.title }}</div>
                 <v-divider class="mb-2 mt-2"></v-divider>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus eaque eum adipisci perspiciatis rerum sequi ratione quisquam autem quia quasi. Laboriosam deserunt fugiat a. Eaque neque voluptates rerum veniam rem.</p>
+                <p>{{ post.description }}</p>
               </div>
             </v-carousel-item>
           </v-carousel>
+        </v-container>
+      </v-flex>
+    </v-layout>
+
+    <v-parallax src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" height="300">
+      <v-layout align-center column justify-center>
+        <h1 class="font-weight-light font-italic">About us</h1>
+      </v-layout>
+    </v-parallax>
+
+    <v-layout row wrap>
+      <v-flex xs12>
+        <v-container>
+          <p>Rav3nSec™  Started in 2012, but we started big Operations in 2016. Our group works on #OpPedo, #OpDeathEaters, #OpHumanTrafficking, and our new operation called #OpSaveKids. Rav3nSec™  works with law enforcement to bring justice, as well to put these child molesters in jail. We also work with other teams and groups who are willing to help this cause. Rav3nSec™ is back to help kids and to help all law enforcement of all countries to track and take down child molesters.</p>
         </v-container>
       </v-flex>
     </v-layout>
@@ -33,6 +54,9 @@ export default {
   computed: {
     posts () {
       return this.$store.getters.featuredPosts
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   methods: {
